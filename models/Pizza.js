@@ -4,11 +4,16 @@ const dateFormat = require('../utils/dateFormat');
 
 const PizzaSchema = new Schema({
     pizzaName: {
-        type: String
-    },
+        type: String,
+        required: true,
+        trim: true
+    }, //Just like Sequelize, when the required field option in Mongoose is set to true, it will require data to exist for that field. Also notice the trim option that's been added, which works just like the JavaScript .trim() method and removes white space before and after the input string. You'll find that useful when working with username and password data.
     createdBy: {
-        type: String
+        type: String,
+        required: true,
+        trim: true
     },
+    //pro-tip: With Mongoose's required field, you can actually provide a custom error message. Simply use the following syntax, and the user will receive your custom message instead of the generic "required" message:
     createdAt: {
         type: Date,
         default: Date.now,
@@ -18,6 +23,9 @@ const PizzaSchema = new Schema({
     },
     size: {
         type: String,
+        required: true,
+        enum: ['Personal', 'Small', 'Medium', 'Large', 'Extra Large'],
+        //In this example, the enum option stands for enumerable, a popular term in web development that refers to a set of data that can be iterated over—much like using the for...in loop to iterate through an object.
         default: 'Large'
     },
     toppings: [],
