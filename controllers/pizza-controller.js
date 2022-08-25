@@ -23,7 +23,7 @@ const pizzaController = {
     Pizza.findOne({ _id: params.id })
       .populate({
         path: 'comments',
-        select: '-__v'
+        select: '-__v'//path
       })
       .select('-__v')
       .then(dbPizzaData => {
